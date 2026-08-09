@@ -40,13 +40,13 @@ jobs:
           npm install
           npm run --silent get_number >> $GITHUB_OUTPUT
 
-      - name: Build
+            - name: Build
         run: ./gradlew build -Pcommit=${{ github.sha }} -Pbuild_number=${{ steps.build-number.outputs.number }}
 
       - name: Webhook Failure
-  if: ${{ failure() }}
-  run: |
-    cd .github/builds
-    npm run webhook -- ${{ steps.build-number.outputs.number }} ${{ github.ref_name }} https://api.github.com/repos/luciferdennitsa62-boop/HM-CORE-CL/compare/${{ github.event.before }}...${{ github.event.after }} false
-  env:
-    DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        if: ${{ failure() }}
+        run: |
+          cd .github/builds
+          npm run webhook -- ${{ steps.build-number.outputs.number }} ${{ github.ref_name }} https://api.github.com/repos/luciferdennitsa62-boop/HM-CORE-CL/compare/${{ github.event.before }}...${{ github.event.after }} false
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
