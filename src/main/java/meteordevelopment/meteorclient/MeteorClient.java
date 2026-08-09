@@ -7,6 +7,7 @@ package meteordevelopment.meteorclient;
 
 import meteordevelopment.meteorclient.addons.AddonManager;
 import meteordevelopment.meteorclient.addons.MeteorAddon;
+import hmcore.HMCore;
 import meteordevelopment.meteorclient.events.game.OpenScreenEvent;
 import meteordevelopment.meteorclient.events.meteor.KeyEvent;
 import meteordevelopment.meteorclient.events.meteor.MouseClickEvent;
@@ -134,10 +135,13 @@ public class MeteorClient implements ClientModInitializer {
         Modules.get().sortModules();
 
         // Load configs
-        Systems.load();
+Systems.load();
 
-        // Post init
-        ReflectInit.init(PostInit.class);
+// Initialize HM Core
+HMCore.init();
+
+// Post init
+ReflectInit.init(PostInit.class);
 
         // Save on shutdown
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
