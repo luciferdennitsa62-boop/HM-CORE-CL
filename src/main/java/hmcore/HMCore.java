@@ -1,6 +1,7 @@
 package hmcore;
 
 import meteordevelopment.meteorclient.MeteorClient;
+import hmcore.core.HMManager;
 
 public class HMCore {
 
@@ -16,6 +17,9 @@ public class HMCore {
 
         MeteorClient.LOG.info("================================");
         MeteorClient.LOG.info("{} v{} loaded", NAME, VERSION);
+
+        HMManager.init();
+
         MeteorClient.LOG.info("HM Core system initialized");
         MeteorClient.LOG.info("================================");
     }
