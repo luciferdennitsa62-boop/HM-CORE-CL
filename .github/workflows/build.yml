@@ -33,14 +33,14 @@ jobs:
         with:
           node-version: 22
 
-      - name: Get current build number
+            - name: Get current build number
         id: build-number
         run: |
           cd .github/builds
           npm install
           npm run --silent get_number >> $GITHUB_OUTPUT
 
-            - name: Build
+      - name: Build
         run: ./gradlew build -Pcommit=${{ github.sha }} -Pbuild_number=${{ steps.build-number.outputs.number }}
 
       - name: Webhook Failure
