@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.fabric.loom)
-    id("maven-publish")
 }
 
 base {
@@ -208,32 +207,6 @@ tasks {
     build {
         if (System.getenv("CI")?.toBoolean() == true) {
             dependsOn("javadocJar")
-        }
-    }
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["java"])
-            artifactId = "meteor-client"
-
-            version = "${libs.versions.minecraft.get()}-SNAPSHOT"
-        }
-    }
-
-    repositories {
-        maven("https://maven.meteordev.org/snapshots") {
-            name = "meteor-maven"
-
-            credentials {
-                username = System.getenv("MAVEN_METEOR_ALIAS")
-                password = System.getenv("MAVEN_METEOR_TOKEN")
-            }
-
-            authentication {
-                create<BasicAuthentication>("basic")
-            }
         }
     }
 }
